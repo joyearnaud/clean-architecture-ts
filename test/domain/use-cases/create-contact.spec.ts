@@ -3,25 +3,18 @@ import { ContactRepository } from '../../../src/domain/repositories/repositories
 import { CreateContactUseCaseImpl as CreateContactUseCase } from '../../../src/domain/use-cases/create-contact';
 
 describe('CreateContactUseCase', () => {
-  class MockContactRepository implements ContactRepository {
-    getAll(): Promise<Contact[]> {
-      // not implemented
-      throw new Error('Method not implemented.');
-    }
-    create(contact: Contact): Promise<boolean> {
-      // not implemented
-      throw new Error('Method not implemented.');
-    }
-  }
-  let mockContactRepository: MockContactRepository;
+  let mockContactRepository: ContactRepository;
 
   beforeEach(() => {
     jest.clearAllMocks();
-    mockContactRepository = new MockContactRepository();
+    mockContactRepository = {
+      getAll: jest.fn(),
+      create: jest.fn()
+    }
   });
 
   test ('should create contact', async () => {
-    const inputData: Contact = { id: 1, firstName: 'John', lastName: 'Smith', email: 'john@gmail.com' };
+    const inputData: Contact = { id: 1, firstName: 'John', lastName: 'Do', email: 'johndo@gmail.com' };
     jest.spyOn(mockContactRepository, 'create').mockImplementation(() => Promise.resolve(true));
 
     const createContactUseCase = new CreateContactUseCase(mockContactRepository);

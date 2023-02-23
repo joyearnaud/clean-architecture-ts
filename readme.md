@@ -21,3 +21,9 @@ yarn ts-jest config:init
     "test": "jest --watchAll --collectCoverage"
   },
 ```
+
+### Initialize data source 
+```ssh
+yarn add mongodb 
+yarn add -D @types/mongodb
+```
